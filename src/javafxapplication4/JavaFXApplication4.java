@@ -4,6 +4,9 @@
  */
 package javafxapplication4;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +21,9 @@ public class JavaFXApplication4 extends Application {
     private static Stage stage;
     private static Scene scene1;
     private static Scene scene2;
+    private static Stage anotherstage;
+    private static Timer timer;
+    
     
     
     @Override
@@ -34,11 +40,14 @@ public class JavaFXApplication4 extends Application {
         
        
         
-        
-        stage.setScene(scene1);
+        stage.setScene(scene2);
         stage.setMaximized(true);
         stage.show();
         
+        anotherstage = new Stage();
+        anotherstage.setScene(scene1);
+        anotherstage.setMaximized(true);
+        anotherstage.show();
         /*XMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/loginScene.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
@@ -54,23 +63,31 @@ public class JavaFXApplication4 extends Application {
     public static Stage getStage(){
         return stage;
     }
-    public static void changeScreen(int num){
+    public static void changeScreen(int num) {
+        try{
         switch (num){
             case 0:
-                stage.close();
-                stage.setScene(scene2);
-                stage.setMaximized(true);
-                stage.show();
+                //stage.close();
+                stage.requestFocus();
+                TimeUnit.SECONDS.sleep(2l);
+                anotherstage.requestFocus();
+                //stage.setScene(scene2);
+                //stage.setMaximized(true);
+                //stage.show();
                 break;
             case 1:
-                stage.close();
-                stage.setScene(scene1);
-                stage.setMaximized(true);
-                stage.show();
+                //stage.close();
+                anotherstage.requestFocus();
+                //stage.setMaximized(true);
+                //stage.show();
                 break;
                 
         }
+        }catch( InterruptedException e){
+            
+        }
     }
+    
     
     
 }
